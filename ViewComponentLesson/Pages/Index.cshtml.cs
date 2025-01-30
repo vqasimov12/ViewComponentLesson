@@ -20,11 +20,10 @@ public class IndexModel(AppDbContext context) : PageModel
         Products = _context.Products.ToList();
 
     }
-    public IActionResult OnPost(int id = 0)
+    public IActionResult OnPost( )
     {
-        Console.WriteLine($"Product ID: {Product.Id}");
 
-        if (id == 0)
+        if (Product.Id == 0)
         {
 
             _context.Products.Add(Product);
@@ -55,6 +54,7 @@ public class IndexModel(AppDbContext context) : PageModel
     public IActionResult OnPostUpdate(int id)
     {
         Product = _context.Products.FirstOrDefault(x => x.Id == id)!;
+        Product.Id = id;
         Products = _context.Products.ToList();
         return Page();
     }
